@@ -1,0 +1,65 @@
+# ToolSuite Pro
+
+60+ free, privacy-first browser tools — PDF, image, conversion, calculators and more. Everything runs client-side; no files are ever uploaded to a server.
+
+## Deploy to Vercel
+
+### Option A — Vercel CLI (fastest)
+
+```bash
+npm i -g vercel
+vercel
+```
+
+Follow the prompts. On first deploy Vercel will ask:
+- **Set up and deploy?** → Y
+- **Which scope?** → your account
+- **Link to existing project?** → N
+- **Project name** → toolsuite (or anything you like)
+- **In which directory is your code located?** → `./` (current directory)
+
+Vercel auto-detects the `outputDirectory: "public"` from `vercel.json` — no build step needed.
+
+### Option B — Vercel Dashboard (drag & drop)
+
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Click **"Import Git Repository"** — or drag the entire project folder onto the dashboard
+3. Leave all build settings blank (no framework, no build command)
+4. Set **Output Directory** to `public`
+5. Click **Deploy**
+
+### Option C — GitHub → Vercel (recommended for ongoing updates)
+
+1. Push this folder to a GitHub repo
+2. Go to [vercel.com/new](https://vercel.com/new) → Import the repo
+3. Vercel reads `vercel.json` automatically — click **Deploy**
+4. Every `git push` to `main` triggers a new deployment
+
+## Project structure
+
+```
+toolsuite-vercel/
+├── public/
+│   ├── index.html      ← The entire app (single file)
+│   ├── robots.txt
+│   └── sitemap.xml
+├── vercel.json         ← Routing, headers, cache rules
+├── .gitignore
+└── README.md
+```
+
+## After deploying
+
+1. **Custom domain** — Vercel Dashboard → your project → Settings → Domains → Add
+2. **Update canonical URL** — replace `https://toolsuite.vercel.app` in `index.html` and `sitemap.xml` with your real domain
+3. **Update sitemap** — change the `<loc>` URL to match your domain
+
+## What's configured
+
+| Feature | Detail |
+|---|---|
+| Routing | All paths → `index.html` (SPA-style) |
+| Cache | HTML: no-cache (always fresh) · assets: 24h |
+| Security headers | CSP, HSTS, X-Frame-Options, X-Content-Type-Options |
+| SEO | Meta description, Open Graph, Twitter Card, sitemap, robots.txt |
+| HTTPS | Automatic via Vercel (Let's Encrypt) |
